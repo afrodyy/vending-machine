@@ -1,0 +1,61 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Biskuit",
+      "price": 6000,
+      "stock": 10,
+      "image": "/roma-sari-gandum.png"
+    },
+    {
+      "id": 2,
+      "name": "Chips",
+      "price": 8000,
+      "stock": 10,
+      "image": "/lays-biru.png"
+    },
+    {
+      "id": 3,
+      "name": "Oreo",
+      "price": 10000,
+      "stock": 10,
+      "image": "/oreo.png"
+    },
+    {
+      "id": 4,
+      "name": "Tango",
+      "price": 12000,
+      "stock": 1,
+      "image": "/tango.png"
+    },
+    {
+      "id": 5,
+      "name": "Cokelat",
+      "price": 15000,
+      "stock": 0,
+      "image": "/cadbury.png"
+    }
+  ],
+  "denominations": [
+    {
+      "id": 1,
+      "value": 2000
+    },
+    {
+      "id": 2,
+      "value": 5000
+    },
+    {
+      "id": 3,
+      "value": 10000
+    },
+    {
+      "id": 4,
+      "value": 20000
+    },
+    {
+      "id": 5,
+      "value": 50000
+    }
+  ]
+}

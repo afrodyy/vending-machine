@@ -1,84 +1,14 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
+import { CartItem, Item } from "@/types/cart";
+import { Denomination } from "@/types/denomination";
+import Image from "next/image";
+import axios from "axios";
 
 export default function Home() {
-  type Item = {
-    id: number;
-    name: string;
-    price: number;
-    stock: number;
-    image: string;
-  };
-
-  type CartItem = {
-    id: number;
-    name: string;
-    price: number;
-    qty: number;
-    subtotal: number;
-  };
-
-  const [items, setItems] = useState<Item[]>([
-    {
-      id: 1,
-      name: "Biskuit",
-      price: 6000,
-      stock: 10,
-      image: "/roma-sari-gandum.png",
-    },
-    {
-      id: 2,
-      name: "Chips",
-      price: 8000,
-      stock: 10,
-      image: "/lays-biru.png",
-    },
-    {
-      id: 3,
-      name: "Oreo",
-      price: 10000,
-      stock: 10,
-      image: "/oreo.png",
-    },
-    {
-      id: 4,
-      name: "Tango",
-      price: 12000,
-      stock: 1,
-      image: "/tango.png",
-    },
-    {
-      id: 5,
-      name: "Cokelat",
-      price: 15000,
-      stock: 0,
-      image: "/cadbury.png",
-    },
-  ]);
-  const denominations = [
-    {
-      id: 1,
-      value: 2000,
-    },
-    {
-      id: 2,
-      value: 5000,
-    },
-    {
-      id: 3,
-      value: 10000,
-    },
-    {
-      id: 4,
-      value: 20000,
-    },
-    {
-      id: 5,
-      value: 50000,
-    },
-  ];
+  const [items, setItems] = useState<Item[]>([]);
+  const [denominations, setDenominations] = useState<Denomination[]>([]);
   const [showDemonimation, setShowDenomination] = useState(false);
   const [insertedMoney, setInsertedMoney] = useState(0);
   const [cart, setCart] = useState<{
@@ -166,7 +96,32 @@ export default function Home() {
     );
   }
 
+  async function getItems() {
+    try {
+      const response = await axios.get("/api/items");
+
+      setItems(response.data);
+    } catch (error) {
+      console.error("Error fetching items: ", error);
+      setItems([]);
+    }
+  }
+
+  async function getDenominations() {
+    try {
+      const response = await axios.get("http://localhost:3001/denominations");
+
+      setDenominations(response.data);
+    } catch (error) {
+      console.error("Error fetching items: ", error);
+      setDenominations([]);
+    }
+  }
+
   useEffect(() => {
+    getItems();
+    getDenominations();
+
     setCart((prevCart) => ({
       ...prevCart,
       change: insertedMoney - prevCart.grandtotal,
